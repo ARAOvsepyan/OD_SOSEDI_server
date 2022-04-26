@@ -23,7 +23,7 @@
 
 ### 1) To run the Rest Server on local system:
 
-1. For installing all the necessary npm packages-
+1. For installing all the necessary npm packages
 
 > \$ npm install
 
