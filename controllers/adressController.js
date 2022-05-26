@@ -37,32 +37,32 @@ class AdressController {
         }
 
         let response = await fetch  (url, options)
-        let json = await response.json();
+        // let json = await response.json();
         
-        let adressArrey = getAdress(json[0])
+        // let adressArrey = getAdress(json[0])
 
-        const adresses_1 = await Adress.findOrCreate({
-            attributes: ['name', 'link'],
-            where: 
-            {name: adressArrey[0]}
-        })
+        // const adresses_1 = await Adress.findOrCreate({
+        //     attributes: ['name', 'link'],
+        //     where: 
+        //     {name: adressArrey[0]}
+        // })
 
-        const adresses_2 = await Adress.findOrCreate({
-            attributes: ['name', 'link'],
-            where: 
-            {name: adressArrey[1]}
-        })
+        // const adresses_2 = await Adress.findOrCreate({
+        //     attributes: ['name', 'link'],
+        //     where: 
+        //     {name: adressArrey[1]}
+        // })
 
-        const adresses_3 = await Adress.findOrCreate({
-            attributes: ['name', 'link'],
-            where: 
-            {name: 
-                adressArrey[2]}
-        }) 
+        // const adresses_3 = await Adress.findOrCreate({
+        //     attributes: ['name', 'link'],
+        //     where: 
+        //     {name: 
+        //         adressArrey[2]}
+        // }) 
 
-        res_adress = res_adress.concat(adresses_1, adresses_2, adresses_3)
+        // res_adress = res_adress.concat(adresses_1, adresses_2, adresses_3)
         
-        return res.json(res_adress)
+        return res.json(response)
     }
 }
 
