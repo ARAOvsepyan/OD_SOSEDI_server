@@ -1,40 +1,78 @@
 const sequelize = require('../db')
 const {DataTypes} = require('sequelize')
+const { Sequelize } = require('../db')
 
-const Admin = sequelize.define('admin', {
+const Addresses = sequelize.define('addresses', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    email: {type: DataTypes.STRING, unique: true,},
-    password: {type: DataTypes.STRING},
-    role: {type: DataTypes.STRING, defaultValue: "USER"},
+    link: {type: DataTypes.STRING},
+    request_count: {type: DataTypes.INTEGER, defaultValue: 0}
 })
 
-const Message = sequelize.define('message', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    firs_name: {type: DataTypes.STRING},
-    last_name: {type: DataTypes.STRING},
-    email: {type: DataTypes.STRING},
-    telephone: {type: DataTypes.STRING},
-    message_info: {type: DataTypes.TEXT, allowNull: false},
-    isRead: {type: DataTypes.BOOLEAN, defaultValue: false}
-})
-
-const Adress = sequelize.define('adress', {
+const Cities = sequelize.define('cities', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     name: {type: DataTypes.STRING, unique: true},
-    link: {type: DataTypes.STRING, unique: true},
-    counter: {type: DataTypes.INTEGER, defaultValue: 0}
 })
 
-const Blog = sequelize.define('blog', {
+const City_areas = sequelize.define('city_areas', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    name: {type: DataTypes.STRING, unique: true},
+})
+
+const City_districts = sequelize.define('city_districts', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    name: {type: DataTypes.STRING, unique: true},
+})
+
+const Failed_jobs = sequelize.define('failed_jobs', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+	uuid: {type: DataTypes.STRING, unique: true},
+    connection: {type: DataTypes.TEXT},
+    queue: {type: DataTypes.TEXT},
+    payload: {type: DataTypes.TEXT('long')},
+    exception: {type: DataTypes.TEXT('long')},
+    failed_at: {type: DataTypes.DATE, allowNull: false, defaultValue: Sequelize.fn('now')}
+})
+
+const News = sequelize.define('news', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     title: {type: DataTypes.STRING, allowNull: false},
-    main_text: {type: DataTypes.TEXT, allowNull: false},
-    img: {type: DataTypes.STRING, allowNull: false}
+    text: {type: DataTypes.TEXT('long'), allowNull: false},
+    img: {type: DataTypes.STRING, allowNull: false},
+    url: {type: DataTypes.STRING, allowNull: false},
 })
 
+const Settings = sequelize.define('settings', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    phone: {type: DataTypes.STRING},
+    email: {type: DataTypes.STRING},
+    telegram: {type: DataTypes.STRING},
+    youtube: {type: DataTypes.STRING},
+    whatsapp: {type: DataTypes.STRING},
+    vk: {type: DataTypes.STRING},
+})
+
+const Users = sequelize.define('users', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    login: {type: DataTypes.STRING, allowNull: false},
+    password: {type: DataTypes.TEXT('long'), allowNull: false},
+})
+
+Addresses.hasMany(Cities)
+Cities.belongsTo(Addresses)
+
+Addresses.hasMany(City_areas)
+City_areas.belongsTo(Addresses)
+
+Addresses.hasMany(City_districts)
+City_districts.belongsTo(Addresses)
+
 module.exports = {
-    Adress,
-    Blog,
-    Admin,
-    Message
+    Addresses,
+    Cities,
+    City_areas,
+    City_districts,
+    Failed_jobs,
+    News,
+    Settings,
+    Users
 }
