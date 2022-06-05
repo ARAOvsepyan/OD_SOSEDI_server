@@ -1,5 +1,5 @@
 class Abbreviation {    
-    getAdress(data) {
+    getAddress(data) {
         let arr = []
         
         /// Город
