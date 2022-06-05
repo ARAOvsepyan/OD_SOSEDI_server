@@ -57,14 +57,14 @@ const Users = sequelize.define('users', {
     password: {type: DataTypes.TEXT('long'), allowNull: false},
 })
 
-Addresses.hasMany(Cities)
-Cities.belongsTo(Addresses)
+Cities.hasMany(Addresses)
+Addresses.belongsTo(Cities)
 
-Addresses.hasMany(City_areas)
-City_areas.belongsTo(Addresses)
+City_areas.hasMany(Addresses)
+Addresses.belongsTo(City_areas)
 
-Addresses.hasMany(City_districts)
-City_districts.belongsTo(Addresses)
+City_districts.hasMany(Addresses)
+Addresses.belongsTo(City_districts)
 
 module.exports = {
     Addresses,
